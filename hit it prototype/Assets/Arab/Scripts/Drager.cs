@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -48,16 +47,14 @@ public class Drager : MonoBehaviour
         //win condition
         if (hajebZghabList.Count<=0)
         {
-            print("Wiin");
+            FindObjectOfType<Manager>().winPanel.SetActive(true);
         }
         
     }
 
     public void OnDragDelegate(PointerEventData data)
     {
-        Debug.Log("Dragging...");
         LookAtMouse();
-
     }
     private void OnMouseDown()
     {
@@ -66,6 +63,7 @@ public class Drager : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        SoundManager.Instance.MouseUp();
         //isMoving = false;
         canMove = false;
 
@@ -79,6 +77,9 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i< hajebZghabList.Count; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+
+                    SoundManager.Instance.HajebUp();
+  
                     hajebZghabList.Remove(hajebZghabList[i]);
                     
                 }    
@@ -89,6 +90,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-1; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -98,6 +101,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-2; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -107,6 +112,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-3; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -116,6 +123,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-4; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -125,6 +134,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-5; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -134,6 +145,9 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-6; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+                    hajebZghabList.Remove(hajebZghabList[i]);
+
                 }
                 break;
             case < 35:
@@ -142,6 +156,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-7; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -150,6 +166,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-8; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -159,6 +177,8 @@ public class Drager : MonoBehaviour
                 for (int i = 0; i < hajebZghabList.Count-9; i++)
                 {
                     hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
@@ -196,14 +216,17 @@ public class Drager : MonoBehaviour
     }
     private void LookAtMouse()
     {
-        Vector2 direction = (Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.localPosition);
-        float angle = Mathf.Atan2(direction.y, direction.x);
-        quaternion rotation = quaternion.AxisAngle(Vector3.forward, angle + 90);
-        transform.localRotation = rotation;
+        Vector2 direction = (Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.localPosition).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0, 0, angle);
+
+
         ScaleTowardsMouse(Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.localPosition));
     }
     private void ScaleTowardsMouse(float scaleDistance)
     {
+        SoundManager.Instance.MouseDrag(scaleDistance);
+
         if (scaleDistance < .65f) return;
         transform.localScale = new Vector3(scaleDistance, 1,1);
     }

@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Arab/MainMenu.unity
+    guid: f2423fb50612c374dafa8e9da7f9a537
+  - enabled: 1
+    path: Assets/Arab/Arab_Nose.unity
+    guid: 55135358ca9057745be1ff59b78cdf22
+  - enabled: 1
+    path: Assets/Arab/Arab_Eye.unity
+    guid: 1c7a17edb284c954bbfba62f1fb14389
+  - enabled: 1
+    path: Assets/Arab/Arab_Soldier.unity
+    guid: ed6a0db32bf844141ba29d26815b896d
   m_configObjects: {}
