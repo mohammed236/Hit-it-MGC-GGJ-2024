@@ -8,8 +8,10 @@ public class Gun : MonoBehaviour
     public GameObject muzzelFlash;
     public GameObject muzzelFlash_Hit;
     public LayerMask layerMask;
+    public float hitForce = 2f;
     RaycastHit2D results;
     CameraShake cam;
+
 
     private void Start()
     {
@@ -32,10 +34,10 @@ public class Gun : MonoBehaviour
             cam.ShakeCamera();
             SoundManager.Instance.Shoot();
             if (results.collider != null) {
-                results.transform.GetComponent<Rigidbody2D>().AddForce(results.transform.right, ForceMode2D.Impulse);
+                results.transform.GetComponent<Rigidbody2D>().AddForce(results.transform.right * hitForce, ForceMode2D.Impulse);
                 results.transform.GetComponent<Health>().Damage(10);
                 
-                GameObject mh = Instantiate(muzzelFlash_Hit, results.transform.position, Quaternion.identity);
+                GameObject mh = Instantiate(muzzelFlash_Hit, results.point, Quaternion.identity);
                 Destroy(mh, .2f);
             }
             GameObject m =Instantiate(muzzelFlash, startPoint.position, Quaternion.identity);

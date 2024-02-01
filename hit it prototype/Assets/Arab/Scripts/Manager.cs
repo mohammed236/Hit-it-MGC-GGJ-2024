@@ -10,16 +10,20 @@ public class Manager : MonoBehaviour
     {
         helpPanel?.SetActive(false);
         winPanel?.SetActive(false);
+        Time.timeScale = 1;
+
     }
     public void Help()
     {
         SoundManager.Instance.Interacte();
         helpPanel?.SetActive(true);
+        Time.timeScale = 0;
     }
     public void Close()
     {
         SoundManager.Instance.Interacte();
         helpPanel?.SetActive(false);
+        Time.timeScale = 1;
     }
     public void Next()
     {

@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: soldier_death_0
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 451
+        width: 223
+        height: 418
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cdd426c089823449d2ac23da0464f2
+      internalID: -889952951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_death_1
+      rect:
+        serializedVersion: 2
+        x: 1369
+        y: 453
+        width: 251
+        height: 317
+      alignment: 9
+      pivot: {x: 0.3630979, y: 0.0072303554}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2346976768788043b4f715d5b6bcee9
+      internalID: 2136170943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_death_2
+      rect:
+        serializedVersion: 2
+        x: 1695
+        y: 453
+        width: 300
+        height: 163
+      alignment: 9
+      pivot: {x: 0.000028483073, y: 0.5025144}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff8436f7ed3517c44bb91f68e35fb882
+      internalID: -730667417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +208,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      soldier_death_0: -889952951
+      soldier_death_1: 2136170943
+      soldier_death_2: -730667417
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

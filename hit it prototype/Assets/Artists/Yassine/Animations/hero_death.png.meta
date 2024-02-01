@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: hero_death_0
+      rect:
+        serializedVersion: 2
+        x: 1395
+        y: 1157
+        width: 261
+        height: 423
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d9d9830bff31146b0a51568eca0fed
+      internalID: 1727057365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hero_death_1
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 1162
+        width: 422
+        height: 401
+      alignment: 9
+      pivot: {x: 0.3360049, y: 0.0053930115}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9761a7a7e68e60e4fab957d3f11d269b
+      internalID: -666402305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hero_death_2
+      rect:
+        serializedVersion: 2
+        x: 2267
+        y: 1195
+        width: 422
+        height: 281
+      alignment: 9
+      pivot: {x: 0.0028903473, y: 0.30758983}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e8f3498abc7f604f98e796b50c6f6ad
+      internalID: -1657775404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hero_death_3
+      rect:
+        serializedVersion: 2
+        x: 2740
+        y: 1159
+        width: 509
+        height: 165
+      alignment: 9
+      pivot: {x: -0.005617153, y: 0.51310664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b472f4033720ef428097c9745e35fd1
+      internalID: -1851867013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +229,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      hero_death_0: 1727057365
+      hero_death_1: -666402305
+      hero_death_2: -1657775404
+      hero_death_3: -1851867013
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -6,6 +6,7 @@ public class playerMovements : MonoBehaviour
     public float speed = 200f;
     public float jumpPower = 500f;
     public float gravityMultiplayer = 2;
+    public Animator anim;
     public LayerMask groundLayer = 3;
     private Rigidbody2D rb;
     bool isGrounded = false;
@@ -22,13 +23,21 @@ public class playerMovements : MonoBehaviour
         {
             transform.localScale = new Vector2(1,transform.localScale.y);
             rb.velocity = Vector2.right * speed * Time.deltaTime + new Vector2(0, rb.velocity.y);
+            if (isGrounded)
+                anim.SetBool("isRunning", true);
         }
         else if(Input.GetKey(KeyCode.A))
         {
             transform.localScale = new Vector2(-1, transform.localScale.y);
             rb.velocity = Vector2.right * -speed * Time.deltaTime + new Vector2(0, rb.velocity.y);
+            if (isGrounded)
+                anim.SetBool("isRunning", true);
         }
-            
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
+
         //jump
         isGrounded = Physics2D.Raycast(transform.position,Vector2.down, .1f, groundLayer);
         Debug.DrawRay(transform.position, Vector2.down ,UnityEngine.Color.red,.1f);
