@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             cam.ShakeCamera();
-            SoundManager.Instance.Shoot();
+            SoundManager.Instance.ShootHero();
             if (results.collider != null) {
                 results.transform.GetComponent<Rigidbody2D>().AddForce(results.transform.right * hitForce, ForceMode2D.Impulse);
                 results.transform.GetComponent<Health>().Damage(10);

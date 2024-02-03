@@ -1,5 +1,6 @@
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class Health : MonoBehaviour
         }
             if (DiePanel != null)
                 DiePanel?.SetActive(false);
+        Time.timeScale = 1f;
+
     }
 
     private void Update()
@@ -52,19 +55,30 @@ public class Health : MonoBehaviour
                 t = 1.5f;
                 anim.SetBool("isDie", true);
                 GetComponent<Rigidbody2D>().isKinematic = true;
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 GetComponent<Collider2D>().enabled = false;
+                try
+                {
+                    GetComponentInChildren<EnemyShoot>()?.gameObject.SetActive(false);
+                }
+                catch (System.Exception)
+                {
+                    throw;
+                }
                 
             }
             if (this.tag == "Player")
             {
-                t = 1.5f;
+                t = 2.5f;
+                if(Time.timeScale >.35f)
+                    Time.timeScale -= .1f;
+
                 anim.SetBool("isDie", true);
                 GetComponent<Rigidbody2D>().isKinematic = true;
                 GetComponent<Collider2D>().enabled = false;
-                if(DiePanel!=null)
-                    DiePanel?.SetActive(true);
-                SoundManager.Instance.Interacte();
-
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                //GetComponent<playerMovements>().enabled = false;
+                StartCoroutine(WaitForDie());
             }
             if (this.tag == "Eye")
             {
@@ -76,10 +90,22 @@ public class Health : MonoBehaviour
         }
         
     }
+    IEnumerator WaitForDie()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+
+        if (DiePanel != null)
+            DiePanel?.SetActive(true);
+        SoundManager.Instance.Interacte();
+        Time.timeScale = 1f;
+
+    }
 
     public void Damage(int damageAmount)
     {
         health-=damageAmount;
+        if (health> maxHealth) health = maxHealth;
+
         if (this.tag == "Eye")
         {
             if (sp != null)
@@ -113,8 +139,14 @@ public class Health : MonoBehaviour
         }
         if (healthbarFill != null && health>=0)
         {
-            healthbarFill.GetComponent<RectTransform>().localScale = new Vector3((float)health / 100, 1, 1);
-            print((float)health / 100);
+            if(tag == "Eye")
+            {
+                healthbarFill.GetComponent<Image>().fillAmount = (float)health / maxHealth;
+            }
+            else
+            {
+                healthbarFill.GetComponent<RectTransform>().localScale = new Vector3((float)health / maxHealth, 1, 1);
+            }
         }
     }
 }

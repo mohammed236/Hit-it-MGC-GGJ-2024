@@ -24,14 +24,20 @@ public class playerMovements : MonoBehaviour
             transform.localScale = new Vector2(1,transform.localScale.y);
             rb.velocity = Vector2.right * speed * Time.deltaTime + new Vector2(0, rb.velocity.y);
             if (isGrounded)
+            {
+                SoundManager.Instance.Step();
                 anim.SetBool("isRunning", true);
+            }
         }
         else if(Input.GetKey(KeyCode.A))
         {
             transform.localScale = new Vector2(-1, transform.localScale.y);
             rb.velocity = Vector2.right * -speed * Time.deltaTime + new Vector2(0, rb.velocity.y);
             if (isGrounded)
+            {
+                SoundManager.Instance.Step();
                 anim.SetBool("isRunning", true);
+            }
         }
         else
         {
@@ -48,6 +54,7 @@ public class playerMovements : MonoBehaviour
         if (!isGrounded)
         {
             rb.gravityScale += Time.deltaTime * gravityMultiplayer;
+            anim.SetBool("isRunning", false);
         }
         else
         {

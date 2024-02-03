@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,8 +10,13 @@ public class Drager : MonoBehaviour
 {
     public RectTransform startPoint;
     public RectTransform endPoint;
+    public RectTransform startPoint_m;
+    public RectTransform endPoint_m;
     public RectTransform goalPoint;
     public RectTransform movingBar;
+    public TextMeshProUGUI noticerMessage;
+    public Transform noticerMessageStartPoint;
+    public ParticleSystem particleHajebUp;
     public List<RectTransform> hajebZghabList = new List<RectTransform>();
     public float speed = 5f;
     public Image face;
@@ -37,6 +43,7 @@ public class Drager : MonoBehaviour
         trigger.triggers.Add(entry);
 
         StartCoroutine(ChangeGoalPosition());
+
     }
     private void Update()
     {
@@ -49,12 +56,20 @@ public class Drager : MonoBehaviour
         {
             FindObjectOfType<Manager>().winPanel.SetActive(true);
         }
-        
+
     }
 
     public void OnDragDelegate(PointerEventData data)
     {
         LookAtMouse();
+    }
+
+    private void NoticeMessage(float pourcentage)
+    {
+        string[] str = { "Good !!", "Great !!", "Nice !", "Awesome !!" };
+        GameObject obj = Instantiate(noticerMessage.gameObject, noticerMessageStartPoint.transform.position, Quaternion.identity,noticerMessageStartPoint);
+        obj.GetComponent<TextMeshProUGUI>().text = str[(int)UnityEngine.Random.Range((int)0, (int)str.Length)];
+        Destroy(obj,2f);
     }
     private void OnMouseDown()
     {
@@ -64,6 +79,7 @@ public class Drager : MonoBehaviour
     private void OnMouseUp()
     {
         SoundManager.Instance.MouseUp();
+        SoundManager.Instance.MouseDrag(1/5, 4.3f, false);
         //isMoving = false;
         canMove = false;
 
@@ -72,45 +88,15 @@ public class Drager : MonoBehaviour
 
         switch (p)
         {
-            case < 1:
-                print(" You're From the Target by: " + p);
-                for (int i = 0; i< hajebZghabList.Count; i++)
-                {
-                    hajebZghabList[i].gameObject.SetActive(false);
-
-                    SoundManager.Instance.HajebUp();
-  
-                    hajebZghabList.Remove(hajebZghabList[i]);
-                    
-                }    
-                break;
-            case < 5:
-                print(" You're From the Target by: " + p);
-
-                for (int i = 0; i < hajebZghabList.Count-1; i++)
-                {
-                    hajebZghabList[i].gameObject.SetActive(false);
-                    SoundManager.Instance.HajebUp();
-
-                    hajebZghabList.Remove(hajebZghabList[i]);
-                }
-                break;
             case < 10:
-                print(" You're From the Target by: " + p);
-                
-                for (int i = 0; i < hajebZghabList.Count-2; i++)
-                {
-                    hajebZghabList[i].gameObject.SetActive(false);
-                    SoundManager.Instance.HajebUp();
 
-                    hajebZghabList.Remove(hajebZghabList[i]);
-                }
-                break;
-            case < 15:
-                print(" You're From the Target by: " + p);
+                NoticeMessage(p);
 
-                for (int i = 0; i < hajebZghabList.Count-3; i++)
+                for (int i = 0; i < hajebZghabList.Count; i++)
                 {
+                    NoticeMessage(p);
+                    ParticleSystem part =Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
                     hajebZghabList[i].gameObject.SetActive(false);
                     SoundManager.Instance.HajebUp();
 
@@ -118,21 +104,13 @@ public class Drager : MonoBehaviour
                 }
                 break;
             case < 20:
-                print(" You're From the Target by: " + p);
+                NoticeMessage(p);
 
-                for (int i = 0; i < hajebZghabList.Count-4; i++)
+                for (int i = 0; i < hajebZghabList.Count-2; i++)
                 {
-                    hajebZghabList[i].gameObject.SetActive(false);
-                    SoundManager.Instance.HajebUp();
-
-                    hajebZghabList.Remove(hajebZghabList[i]);
-                }
-                break;
-            case < 25:
-                print(" You're From the Target by: " + p);
-
-                for (int i = 0; i < hajebZghabList.Count-5; i++)
-                {
+                    NoticeMessage(p);
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
                     hajebZghabList[i].gameObject.SetActive(false);
                     SoundManager.Instance.HajebUp();
 
@@ -140,21 +118,13 @@ public class Drager : MonoBehaviour
                 }
                 break;
             case < 30:
-                print(" You're From the Target by: " + p);
+                NoticeMessage(p);
 
-                for (int i = 0; i < hajebZghabList.Count-6; i++)
+                for (int i = 0; i < hajebZghabList.Count-3; i++)
                 {
-                    hajebZghabList[i].gameObject.SetActive(false);
-                    SoundManager.Instance.HajebUp();
-                    hajebZghabList.Remove(hajebZghabList[i]);
-
-                }
-                break;
-            case < 35:
-                print(" You're From the Target by: " + p);
-
-                for (int i = 0; i < hajebZghabList.Count-7; i++)
-                {
+                    NoticeMessage(p);
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
                     hajebZghabList[i].gameObject.SetActive(false);
                     SoundManager.Instance.HajebUp();
 
@@ -162,20 +132,82 @@ public class Drager : MonoBehaviour
                 }
                 break;
             case < 40:
-                print(" You're From the Target by: " + p);
-                for (int i = 0; i < hajebZghabList.Count-8; i++)
+                NoticeMessage(p);
+
+                for (int i = 0; i < hajebZghabList.Count-4; i++)
                 {
+                    NoticeMessage(p);
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
                     hajebZghabList[i].gameObject.SetActive(false);
                     SoundManager.Instance.HajebUp();
 
                     hajebZghabList.Remove(hajebZghabList[i]);
                 }
                 break;
-            case < 100:
-                print(" You're From the Target by: " + p);
+            case < 50:
+                NoticeMessage(p);
+
+                for (int i = 0; i < hajebZghabList.Count-5; i++)
+                {
+                    NoticeMessage(p);
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
+                    hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
+                    hajebZghabList.Remove(hajebZghabList[i]);
+                }
+                break;
+            case < 60:
+                NoticeMessage(p);
+
+                for (int i = 0; i < hajebZghabList.Count-6; i++)
+                {
+                    NoticeMessage(p);
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
+                    hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+                    hajebZghabList.Remove(hajebZghabList[i]);
+
+                }
+                break;
+            case < 70:
+                NoticeMessage(p);
+
+                for (int i = 0; i < hajebZghabList.Count-7; i++)
+                {
+                    NoticeMessage(p);
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
+                    hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
+                    hajebZghabList.Remove(hajebZghabList[i]);
+                }
+                break;
+            case < 80:
+                NoticeMessage(p);
+                for (int i = 0; i < hajebZghabList.Count-8; i++)
+                {
+                    NoticeMessage(p);
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
+                    hajebZghabList[i].gameObject.SetActive(false);
+                    SoundManager.Instance.HajebUp();
+
+                    hajebZghabList.Remove(hajebZghabList[i]);
+                }
+                break;
+            case < 90: // TODO : drop it to 50%
 
                 for (int i = 0; i < hajebZghabList.Count-9; i++)
                 {
+                    NoticeMessage(p);
+
+                    ParticleSystem part = Instantiate(particleHajebUp, hajebZghabList[i].localPosition, Quaternion.identity);
+                    part.Play();
                     hajebZghabList[i].gameObject.SetActive(false);
                     SoundManager.Instance.HajebUp();
 
@@ -189,14 +221,17 @@ public class Drager : MonoBehaviour
         {
             case <= 3:
                 face.sprite = faces[3];
+                    SoundManager.Instance.HitNose();
                 StartCoroutine(ResetSpite(1.5f, 3));
                 break;
             case <= 7:
                 face.sprite = faces[2];
+                    SoundManager.Instance.HitNose();
                 StartCoroutine(ResetSpite(1.5f, 2));
                 break;
             case <= 9:
                 face.sprite = faces[1];
+                    SoundManager.Instance.HitNose();
                 StartCoroutine(ResetSpite(1.5f, 1));
                 break;
             case <= 10:
@@ -207,7 +242,6 @@ public class Drager : MonoBehaviour
         }
 
         //initialize transform
-        print("initialize");
         transform.localPosition = zaghbaInitialposition;
         transform.localScale = zaghbaInitialscale;
         transform.localRotation = zaghbaInitialrotation;
@@ -225,7 +259,7 @@ public class Drager : MonoBehaviour
     }
     private void ScaleTowardsMouse(float scaleDistance)
     {
-        SoundManager.Instance.MouseDrag(scaleDistance);
+        SoundManager.Instance.MouseDrag(scaleDistance, 4.3f,true);
 
         if (scaleDistance < .65f) return;
         transform.localScale = new Vector3(scaleDistance, 1,1);
@@ -247,10 +281,11 @@ public class Drager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(UnityEngine.Random.Range(2.5f,5f)); 
-            goalPoint.localPosition = new Vector2((int)UnityEngine.Random.Range(startPoint.localPosition.x, endPoint.localPosition.x), goalPoint.localPosition.y);
+            yield return new WaitForSecondsRealtime(UnityEngine.Random.Range(2.5f,5f));
+            goalPoint.localPosition = new Vector2((int)UnityEngine.Random.Range(startPoint_m.localPosition.x, endPoint_m.localPosition.x), goalPoint.localPosition.y);
             //initialize the distance between the goal & the moving bar
             distance = Mathf.Abs(movingBar.transform.localPosition.x - goalPoint.localPosition.x);
+
         }
     }
     IEnumerator ResetSpite(float time,int index)

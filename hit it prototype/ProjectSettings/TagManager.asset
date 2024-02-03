@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - Virus
   - Eye
+  - FxTemporaire
+  - Moving
   layers:
   - Default
   - TransparentFX

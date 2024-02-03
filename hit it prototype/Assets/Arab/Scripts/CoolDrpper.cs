@@ -10,26 +10,37 @@ public class CoolDrpper : MonoBehaviour
     public Sprite hold;
     SpriteRenderer rendrer;
     CameraShake cam;
+
+    public Texture2D defaultCursor;
+    public Texture2D hoverCursor;
+
     private void Start()
     {
         cam = FindObjectOfType<CameraShake>();
         rendrer = GetComponent<SpriteRenderer>();
         rendrer.sprite = hold;
+
+        Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.ForceSoftware);
+
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //drrop cool
             DropCool();
             rendrer.sprite = press;
             StartCoroutine(Wait());
-
+            Cursor.SetCursor(hoverCursor, Vector2.zero, CursorMode.ForceSoftware);
+        }
+        else if(Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.ForceSoftware);
         }
     }
     public void DropCool()
     {
-        SoundManager.Instance.Shoot();
+        SoundManager.Instance.ShootEye();
         Instantiate(bullet,startPoint.position,Quaternion.identity);
         cam.ShakeCamera();
     }
